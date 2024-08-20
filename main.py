@@ -2,11 +2,14 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import scrolledtext
+import pyperclip
 
-def bla():
-    g_code = ""
-    print("something")
-    text_area.insert(tk.INSERT, " ")
+def copy_text():
+    text_to_copy = text_area.get("1.0", tk.END)
+    pyperclip.copy(text_to_copy)
+def clear_code():
+    text_area.configure(state='normal')
+    text_area.delete('1.0',tk.END)
 def generate_code():
 
     n = int(n_entry.get())
@@ -33,11 +36,12 @@ def generate_code():
     g_code_body=""
     i = 0
     while i < n:
-        g_code_body += f"G0X{l+o+i*l}\nM3\nG1A{360*(i+1)}F{fcut}\nM5\n"
+        g_code_body += f"G0X{l+i*l+o*(1+i)}\nM3\nG1A{360*(i+1)}F{fcut}\nM5\n"
         i+=1
     g_code_ending = "M30"
     g_code = f"{g_code_entry}{g_code_body}{g_code_ending}"
     text_area.insert(tk.INSERT,g_code)
+    text_area.configure(state='disabled')
 
 
 ##VIEWCONTROLLER
@@ -50,36 +54,37 @@ canvas.grid(row=0, column=1)
 
 #Labels
 n_label = Label(text='n', font=12)
-n_label.grid(row=1, column=0, sticky="E")
+n_label.grid(row=1, column=0, sticky="E", pady=5)
 l_label = Label(text="interval length(mm)",font=12)
-l_label.grid(row=2, column=0, sticky="E")
+l_label.grid(row=2, column=0, sticky="E", pady=5)
 t_label = Label(text="thickness(mm)",font=12)
-t_label.grid(row=3,  column=0, sticky="E")
+t_label.grid(row=3,  column=0, sticky="E", pady=5)
 o_label = Label(text="offset(mm)",font=12)
-o_label.grid(row=4,  column=0, sticky="E")
+o_label.grid(row=4,  column=0, sticky="E", pady=5)
 
 # Entries
 n_entry = Entry(width=35, font=12)
 n_entry.insert(0,1)
 n_entry.focus()
-n_entry.grid(row=1, column=1, sticky='W')
+n_entry.grid(row=1, column=1, sticky='W', pady=5)
 l_entry = Entry(width=35,font=12)
 l_entry.insert(0,10)
-l_entry.grid(row=2, column=1,sticky='W')
+l_entry.grid(row=2, column=1,sticky='W', pady=5)
 t_entry = Entry(width=35,font=12)
 t_entry.insert(0,1)
-t_entry.grid(row=3, column=1,sticky='W')
+t_entry.grid(row=3, column=1,sticky='W', pady=5)
 o_entry = Entry(width=35,font=12)
 o_entry.insert(0,2)
-o_entry.grid(row=4, column=1,sticky='W')
+o_entry.grid(row=4, column=1,sticky='W', pady=5)
 
 #Buttons
 generate_code_but = Button(text="Generate G-Code", width=36, command=generate_code)
 generate_code_but.grid(row=1, column=1, sticky="E")
-clear_code_but = Button(text="Clear", width=36, command=bla)
+clear_code_but = Button(text="Clear", width=36, command=clear_code)
 clear_code_but.grid(row=2, column=1, sticky="E")
-
+copy_but = Button(text="Copy", width=20, command=copy_text)
+copy_but.grid(row=6, column=1, sticky="SE", pady=10)
 #Output
-text_area = scrolledtext.ScrolledText(window, wrap=tk.WORD, width= 80, height= 10, font=('Times New Roman', 12))
-text_area.grid(column=1, columnspan=2)
+text_area = scrolledtext.ScrolledText(window, wrap=tk.WORD, width= 73, height= 30, font=('Times New Roman', 12))
+text_area.grid(row=5,column=1, columnspan=2)
 window.mainloop()
