@@ -53,12 +53,12 @@ def generate_code():
 BACKGROUND_COLOR = "#B1DDC6"
 window = Tk()
 window.title("Simple cut G-Code generator")
-window.geometry('1000x800')
+window.geometry('780x580')
 #window.columnconfigure((0,1,2), weight=1)
-window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+window.config(padx=20, pady=20, bg=BACKGROUND_COLOR)
 
-img_tk = tk.PhotoImage(file="imgs/header_image2.png")
-canvas = Canvas(width=780, height=80)
+img_tk = tk.PhotoImage(file="header_image2.png")
+canvas = Canvas(width=750, height=80)
 canvas.create_image(400,100,image=img_tk, anchor=S)
 canvas.grid(row=0, column=0, columnspan=3)
 
@@ -75,7 +75,7 @@ t_label.grid(row=3,  column=0, sticky="E", pady=5)
 o_label = Label(text="Bù chều dài o(mm)",font=font_sd, bg=BACKGROUND_COLOR)
 o_label.grid(row=4,  column=0, sticky="E", pady=5)
 
-fcut_label = Label(text="Tốc độ cắt", font=("Helvetica", "12", "italic"), bg=BACKGROUND_COLOR,fg="#0D7C66")
+fcut_label = Label(text="Tốc độ cắt", font=("Helvetica", "9", "italic"), bg=BACKGROUND_COLOR,fg="#0D7C66")
 fcut_label.grid(row=5, column=0, sticky="ES", pady=1)
 
 # Infor ref
@@ -87,32 +87,31 @@ text_ref = ("Bảng tham chiếu tốc độ cắt\n"
             "   4               2800\n"
             "   5               1980\n"
             "   6               1430\n"
-            "Phần mềm đã tự động tính toán tốc độ \n"
-            "dựa trên thông số t đã input. \n"
-            "Tuy nhiên bạn có thể hiệu chỉnh \n"
-            "tốc độ cắt trong field dưới đây.\n"
-            "Lưu ý nhập 0 nếu muốn phần mềm tự tính toán.\n"
+            "Phần mềm đã tự động tính toán tốc độ dựa trên thông số t \n"
+            "đã input.Tuy nhiên bạn có thể hiệu chỉnh tốc độ cắt\n"
+            "trong field dưới đây.Lưu ý nhập 0 nếu muốn phần mềm \n"
+            "tự tính toán.\n"
             )
-ref_label = Label(text=text_ref, font=("Helvetica", "11", "italic"), bg=BACKGROUND_COLOR,fg="#0D7C66" )
-ref_label.grid(row=5, column=0, columnspan=2, sticky="NEW", pady=10)
+ref_label = Label(text=text_ref, font=("Helvetica", "9", "italic"), bg=BACKGROUND_COLOR,fg="#0D7C66" )
+ref_label.grid(row=5, column=0, columnspan=2, sticky="N", pady=5)
 
 # Entries
 n_entry = Entry(width=15, font=12)
 n_entry.insert(0,1)
 n_entry.focus()
-n_entry.grid(row=1, column=1, sticky='W', pady=5)
+n_entry.grid(row=1, column=1, sticky='W', pady=2)
 
 l_entry = Entry(width=15,font=12)
 l_entry.insert(0,10)
-l_entry.grid(row=2, column=1,sticky='W', pady=5)
+l_entry.grid(row=2, column=1,sticky='W', pady=2)
 
 t_entry = Entry(width=15,font=12)
 t_entry.insert(0,1)
-t_entry.grid(row=3, column=1,sticky='W', pady=5)
+t_entry.grid(row=3, column=1,sticky='W', pady=2)
 
 o_entry = Entry(width=15,font=12)
 o_entry.insert(0,2)
-o_entry.grid(row=4, column=1,sticky='W', pady=5)
+o_entry.grid(row=4, column=1,sticky='W', pady=2)
 
 fcut_entry =  Entry(width=10, font=8)
 fcut_entry.insert(0,0)
@@ -129,6 +128,6 @@ copy_but = Button(text="Sao chép", width=20, command=copy_text)
 copy_but.grid(row=6, column=2, sticky="E", pady=10, padx=5)
 
 #Output
-text_area = scrolledtext.ScrolledText(window, wrap=tk.WORD, width= 45, height= 28, font=("Helvetica", "12"))
-text_area.grid(row=1,column=2, rowspan=5, sticky="NS",pady=5, padx=5)
+text_area = scrolledtext.ScrolledText(window, wrap=tk.WORD, width= 30, height= 23, font=("Helvetica", "12"))
+text_area.grid(row=1,column=2, rowspan=5, sticky="NS",pady=5, padx=10)
 window.mainloop()
