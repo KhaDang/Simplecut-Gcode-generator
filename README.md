@@ -1,4 +1,4 @@
-Đây là Desktop app đơn giản dể taọ mã G-code phù hợp với các ứng dụng sử dụng máy CNC 2 trục
+Đây là Desktop app đơn giản để taọ mã G-code phù hợp với các ứng dụng sử dụng máy CNC 2 trục
 Bạn có thể miễn phí tải về, tùy biến User interface, hoặc điều chỉnh output của app theo design riêng của mình.
 Để tạo file cài đặt để chạy trên máy tính windows tham khảo pyinstaller, module create file .exe từ source code.
 
